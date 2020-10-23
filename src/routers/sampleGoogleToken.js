@@ -1,0 +1,21 @@
+const sampleToken = {
+  access_token:
+    'ya29.a0AfH6SMCIFcWzD2oFPflZ7u5S0NgDfrQxqhgDXJAiiLBsF9QfvaVwWM1YXWWt4hRRhA3BjUcxEhoOujCQcu--5QbD70FCdcaT-ntAJgt4St_-FIl5J5RteD-sLPgG6fy8tTYGmn7DyZzEYBFXewh4p7KPMltYiAWynH4',
+  refresh_token:
+    '1//03hVY60E4mpZTCgYIARAAGAMSNwF-L9IrTITinKG4v-jQXKlajfNLGM-U-bx9g0FvNXv93YcEylc3w-JvyOBgWmWsL9r3fHPenVQ',
+  scope: 'https://www.googleapis.com/auth/userinfo.profile',
+  token_type: 'Bearer',
+  id_token:
+    'eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3OGFiMWRjNTkxM2Q5MjlkMzdjMjNkY2FhOTYxODcyZjhkNzBiNjgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI4MjM1NzQzNzQ3NjQtb20xbjM0bW5kOGUxMnA0YnNrNzY1YmV2bDRldGZhcGQuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI4MjM1NzQzNzQ3NjQtb20xbjM0bW5kOGUxMnA0YnNrNzY1YmV2bDRldGZhcGQuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTc0OTU4MjU1NTM4MzE1NjE1NDAiLCJhdF9oYXNoIjoicVZhdVlHTF9NbThsVXlqaVByWldrQSIsIm5hbWUiOiJBZGV5aW5rYSBBZGViaXlpIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdqQlMxcFlCY1NSbXdzOTlkd3N3cHlzWlcyMVdWNFBNc0JTUTcweTVRPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IkFkZXlpbmthIiwiZmFtaWx5X25hbWUiOiJBZGViaXlpIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE2MDMzMDMxMTQsImV4cCI6MTYwMzMwNjcxNH0.XJMn3VFIYKq8eHNpr2aZDCobaFsl66nRoM45H-5eqvM_o9udT1WvSqiYB3QBp_agJVIWyNBUzgcIHGQKkKG3TYADRXdJ_pFP4vJQZyq_yiCsj_DT3lDTkg3ySz8AOGPxqVD_2MJlyk0MjT__MQft-0cArq8uBfK9AqEfsihjkVTsKJepUYPzfCl2hjD1Gz_wKaeE6XtLeNqB_2nueH5jPeMG4chRyoSwe_F0Mff87GFiYFpjoLyFx1KTZYGq22xoRudV3fqVN1yzPjCax1AuAdWp-6QlscOO37RfpcnLEaol7ksY88NmRDho_cyXJugmA8VHQnht39VLUWAcknentA',
+  expiry_date: 1603306713920,
+};
+{
+  "id": "117495825553831561540",
+  "email": "yinkash1000@gmail.com",
+  "verified_email": true,
+  "name": "Adeyinka Adebiyi",
+  "given_name": "Adeyinka",
+  "family_name": "Adebiyi",
+  "picture": "https://lh3.googleusercontent.com/a-/AOh14GjBS1pYBcSRmws99dwswpysZW21WV4PMsBSQ70y5Q=s96-c",
+  "locale": "en"
+}
