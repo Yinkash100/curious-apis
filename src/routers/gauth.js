@@ -7,29 +7,29 @@ const OAuth2 = google.Auth.OAuth2Client;
 
 const User = require('../models/user.models');
 
-function getOAuthClient() {
-  new OAuth2();
-  return new OAuth2(
-    process.env.GOOGLE_OAUTH_CLIENT_ID,
-    process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-    'http://localhost:3002/authWithGoogle/callback'
-  );
-}
+// function getOAuthClient() {
+//   new OAuth2();
+//   return new OAuth2(
+//     process.env.GOOGLE_OAUTH_CLIENT_ID,
+//     process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+//     'http://localhost:3002/authWithGoogle/callback'
+//   );
+// }
 
-function getAuthUrl() {
-  const oauth2client = getOAuthClient();
-  const scope = [
-    'https://www.googleapis.com/auth/plus.login',
-    'https://www.googleapis.com/auth/userinfo.email',
-  ];
+// function getAuthUrl() {
+//   const oauth2client = getOAuthClient();
+//   const scope = [
+//     'https://www.googleapis.com/auth/plus.login',
+//     'https://www.googleapis.com/auth/userinfo.email',
+//   ];
 
-  const url = oauth2client.generateAuthUrl({
-    access_type: 'offline',
-    scope,
-  });
+//   const url = oauth2client.generateAuthUrl({
+//     access_type: 'offline',
+//     scope,
+//   });
 
-  return url;
-}
+//   return url;
+// }
 
 async function getUserInfo(token) {
   return new Promise((resolve, reject) => {

@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 var DateOnly = require('mongoose-dateonly')(mongoose);
 
 const userSchema = new mongoose.Schema(
@@ -15,8 +16,6 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       lowercase: true,
-      unique: true,
-      // required: true,
     },
     name: {
       type: String,
@@ -24,7 +23,12 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       lowercase: true,
-      unique: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error('Email is invalid');
+        }
+      },
+      unique: [true, 'Email already exist'],
       required: true,
     },
     password: {
@@ -34,23 +38,40 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
+    photoURL: {
+      type: String,
+    },
     birthDate: {
       type: DateOnly,
       trim: true,
     },
     googleId: {
       type: String,
-      unique: true,
+      index: {
+        unique: true,
+        sparse: true,
+      },
     },
     facebookId: {
       type: String,
-      unique: true,
+      index: {
+        unique: true,
+        sparse: true,
+      },
     },
     instagramId: {
       type: String,
+      index: {
+        unique: true,
+        sparse: true,
+      },
     },
     twitterId: {
       type: String,
+      index: {
+        unique: true,
+        sparse: true,
+      },
     },
     // inconsistienc in naming convention below
     account_type: {
@@ -169,22 +190,34 @@ userSchema.statics.findByCredentials = async function (email, password) {
 };
 
 userSchema.statics.findOrCreateGoogleUser = async function (userData) {
-  console.log('using this find or create shii');
   let user = await User.findOne({ googleId: userData.id });
   if (!user) {
-    console.log(1);
     user = new User({
       email: userData.email,
       name: userData.given_name,
       googleId: userData.id,
+      photoURL: userData.picture,
       password: '',
     });
-    console.log(2);
     await user.save();
-    console.log(3);
     return user;
   }
-  console.log('The user from the find or create shii');
+  return user;
+};
+
+userSchema.statics.findOrCreateFacebookUser = async function (userData) {
+  let user = await User.findOne({ facebookId: userData.id });
+  if (!user) {
+    user = new User({
+      email: userData.email,
+      name: userData.given_name,
+      facebookId: userData.id,
+      photoURL: userData.photoURL,
+      password: '',
+    });
+    await user.save();
+    return user;
+  }
   return user;
 };
 

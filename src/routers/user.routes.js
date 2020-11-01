@@ -1,27 +1,63 @@
 const express = require('express');
 const router = new express.Router();
 
-// const User = require('../models/user.model');
 const UserController = require('../controllers/user.controller');
+const googleAuthController = require('../controllers/googleAuth.controller');
+const facebookAuthController = require('../controllers/facebookAuth.controller');
+
 // to create a user
 router.post('/user', (req, res) => {
-  console.log('They are trying to use my own route');
-  UserController.registerUser(req, res);
-});
-
-router.post('/user/authWithFacebook', (req, res) => {
-  UserController.authUsingFacebook(req, res);
+  UserController.registerUser(req)
+    .then((resp) => {
+      return res.status(resp.statusCode).send(resp.data);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
 });
 
 // to login a user
 router.post('/user/login', (req, res) => {
-  UserController.loginUser(req, res);
+  UserController.loginUser(req.body.email, req.body.password)
+    .then((resp) => res.status(resp.statusCode).send(resp.data))
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
+});
+
+router.post('/authWithGoogle', (req, res) => {
+  googleAuthController
+    .authenticate(req.body.token)
+    .then((resp) => res.status(resp.statusCode).send(resp.data))
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
+});
+
+router.post('/authWithFacebook', (req, res) => {
+
+  facebookAuthController
+     .authenticate(req.body.userID, req.body.token)
+    .then((resp) => res.status(resp.statusCode).send(resp.data))
+    .catch((err) => {
+      console.error(err);
+      console.log('The error that occured ==>\n', err);
+      res.status(500);
+    });
 });
 
 // to activate user account.
 // the frontend calls this API wile passing the ActivationCode as parameters
 router.get('/user/activate/:activationCode', (req, res) => {
-  UserController.activateUserAccount(req, res);
+  UserController.activateUserAccount(req, res)
+    .then((resp) => res.status(resp.statusCode).send(resp.data))
+    .catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
 });
 
 //==========================================================//
