@@ -31,24 +31,20 @@ function getUserInfo(id, token) {
 
 module.exports = {
   async authenticate(facebookUserID, facebookAccessToken) {
-    console.log(222);
     return new Promise(async (resolve, reject) => {
       let userData = await getUserInfo(
         facebookUserID,
         facebookAccessToken
       ).catch((err) => console.error(err));
-      console.log('userprocessed userdata ==> \n', userData);
       userData = JSON.parse(userData);
       userData.photoURL = userData.picture.data.url;
       delete userData.picture;
-      console.log('userData ==>> ', userData);
       if (!userData) {
         resolve({
           statusCode: 400,
           data: 'Incorrect or expired token',
         });
       }
-      console.log('The returned userData is ', userData);
       const user = await User.findOrCreateFacebookUser(userData);
       await user.save();
       const jwtToken = await user.generateAuthToken();

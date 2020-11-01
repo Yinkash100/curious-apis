@@ -41,7 +41,6 @@ module.exports = {
           data: 'Incorrect or expired token',
         });
       }
-      console.log('The returned userData ==? \n', userData);
       const user = await User.findOrCreateGoogleUser(userData);
       await user.save();
       const jwtToken = await user.generateAuthToken();

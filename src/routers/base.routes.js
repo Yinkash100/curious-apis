@@ -1,9 +1,5 @@
-const express = require('express');
-const router = new express.Router();
+const router = require('express').Router();
 
-const UserController = require('../controllers/user.controller');
-const googleAuthController = require('../controllers/googleAuth.controller');
-const facebookAuthController = require('../controllers/facebookAuth.controller');
 //==========================================================//
 router.get('/subjects', (req, res) => {
   res.status(200).send([
@@ -263,59 +259,5 @@ router.get('/institutions', (req, res) => {
 });
 
 //====================================//
-
-// to create a user
-router.post('/', (req, res) => {
-  UserController.registerUser(req)
-    .then((resp) => {
-      return res.status(resp.statusCode).send(resp.data);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500);
-    });
-});
-
-// to login a user
-router.post('/login', (req, res) => {
-  UserController.loginUser(req.body.email, req.body.password)
-    .then((resp) => res.status(resp.statusCode).send(resp.data))
-    .catch((err) => {
-      console.error(err);
-      res.status(500);
-    });
-});
-
-router.post('/authWithGoogle', (req, res) => {
-  googleAuthController
-    .authenticate(req.body.token)
-    .then((resp) => res.status(resp.statusCode).send(resp.data))
-    .catch((err) => {
-      console.error(err);
-      res.status(500);
-    });
-});
-
-router.post('/authWithFacebook', (req, res) => {
-  facebookAuthController
-    .authenticate(req.body.userID, req.body.token)
-    .then((resp) => res.status(resp.statusCode).send(resp.data))
-    .catch((err) => {
-      console.error(err);
-      console.err('The error that occured ==>\n', err);
-      res.status(500);
-    });
-});
-
-// to activate user account.
-// the frontend calls this API wile passing the ActivationCode as parameters
-router.get('/activate/:activationCode', (req, res) => {
-  UserController.activateUserAccount(req, res)
-    .then((resp) => res.status(resp.statusCode).send(resp.data))
-    .catch((err) => {
-      console.error(err);
-      res.status(500);
-    });
-});
 
 module.exports = router;
