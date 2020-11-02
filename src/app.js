@@ -1,22 +1,23 @@
 const http = require('http');
 const express = require('express');
-const Session = require('express-session');
+const session = require('express-session');
+// require('connect-mongo')(session);
 const apiRoutes = require('./api-routes');
 const baseRoutes = require('./routers/base.routes');
 
 const cors = require('cors');
-require('./db/mongoose');
+const mongooseConnection = require('./db/mongoose');
 
 const userRouter = require('./routers/user.routes');
 
 const app = express();
+
 app.use(
-  Session({
-    cookie: {
-      secure: true,
-      maxAge: 60000,
-    },
+  session({
     secret: 'yeyesecretforhere',
+    //    store: new MongoStore({
+    // mongooseConnection,
+    // }),
     resave: false,
     saveUninitialized: true,
   })
